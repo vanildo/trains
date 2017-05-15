@@ -10,7 +10,6 @@ public class Edge implements Comparable<Edge> {
 	}
 
 	public Edge(Vertex left, Vertex right, int weight) {
-		super();
 		this.left = left;
 		this.right = right;
 		this.weight = weight;
@@ -41,36 +40,17 @@ public class Edge implements Comparable<Edge> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((left == null) ? 0 : left.hashCode());
-		result = prime * result + ((right == null) ? 0 : right.hashCode());
-		result = prime * result + weight;
-		return result;
+		return (left.getName() + right.getName()).hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+	public boolean equals(Object other) {
+		if (!(other instanceof Edge)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Edge other = (Edge) obj;
-		if (left == null) {
-			if (other.left != null)
-				return false;
-		} else if (!left.equals(other.left))
-			return false;
-		if (right == null) {
-			if (other.right != null)
-				return false;
-		} else if (!right.equals(other.right))
-			return false;
-		if (weight != other.weight)
-			return false;
-		return true;
+		}
+		Edge e = (Edge) other;
+
+		return e.left.equals(this.left) && e.right.equals(this.right);
 	}
 
 	@Override
@@ -80,5 +60,5 @@ public class Edge implements Comparable<Edge> {
 				.append("]");
 		return builder.toString();
 	}
-	
+
 }

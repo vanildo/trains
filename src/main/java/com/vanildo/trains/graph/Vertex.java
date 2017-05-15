@@ -57,11 +57,8 @@ public class Vertex {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((neighbors == null) ? 0 : neighbors.hashCode());
-		return result;
+		return this.name.hashCode();
+
 	}
 
 	@Override
