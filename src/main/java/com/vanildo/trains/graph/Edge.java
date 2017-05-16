@@ -1,5 +1,11 @@
 package com.vanildo.trains.graph;
 
+
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class Edge implements Comparable<Edge> {
 
 	private Vertex left, right;
@@ -37,6 +43,10 @@ public class Edge implements Comparable<Edge> {
 	public int getWeight() {
 		return weight;
 	}
+	
+	public String getEdgeName() {
+		return this.left.getName() + this.right.getName();
+	}
 
 	@Override
 	public int hashCode() {
@@ -50,7 +60,11 @@ public class Edge implements Comparable<Edge> {
 		}
 		Edge e = (Edge) other;
 
-		return e.left.equals(this.left) && e.right.equals(this.right);
+//		return e.left.equals(this.left) && e.right.equals(this.right);
+		if (this.getEdgeName() == null && e.getEdgeName() != null) {
+			return false;
+		}
+		return this.getEdgeName() != null && this.getEdgeName().equals(e.getEdgeName());
 	}
 
 	@Override

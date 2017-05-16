@@ -2,12 +2,10 @@ package com.vanildo.trains.util;
 
 import java.net.URI;
 
-import com.vanildo.trains.graph.Graph;
-
-public interface ILoader {
+public interface ILoader<T> {
 	
-	public Graph loadFromFile(String path);
+	public T loadFromFile(String path);
 	
-	public Graph loadFromFile(URI uri);
+	public T loadFromFile(URI uri);
 
 }

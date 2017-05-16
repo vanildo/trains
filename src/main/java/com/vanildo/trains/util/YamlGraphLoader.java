@@ -13,12 +13,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.vanildo.trains.graph.Graph;
 import com.vanildo.trains.graph.Vertex;
-import com.vanildo.trains.util.GraphHolder.EdgeHolder;
+import com.vanildo.trains.util.EdgeHolder;
 
-public class GraphLoader implements ILoader{
+public class YamlGraphLoader implements ILoader<Graph>{
 	
 	private final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-	static final Logger logger = LoggerFactory.getLogger(GraphLoader.class);
+	static final Logger logger = LoggerFactory.getLogger(YamlGraphLoader.class);
 
 	public Graph loadFromFile(final String path) {
 
@@ -37,16 +37,15 @@ public class GraphLoader implements ILoader{
 		if (holder == null) {
 			return graph;
 		}
-		for (Vertex vertex : holder.getVertices()) {
-			logger.info("Vertex: {}", vertex);
-			graph.addVertex(vertex, true);
+
+		for (EdgeHolder edgeHolder : holder.getEdges()) {
+			logger.debug("EdgeHolder: {}", edgeHolder);
+			graph.addVertex(new Vertex(edgeHolder.getLeft()), true);
+			graph.addVertex(new Vertex(edgeHolder.getRight()), true);
+			graph.addEdge(graph.getVertex(edgeHolder.getLeft()), graph.getVertex(edgeHolder.getRight()), edgeHolder.getWeight());
 		}
 		
-		for (EdgeHolder edgeHolder : holder.getEdges()) {
-			logger.info("EdgeHolder: {}", edgeHolder);
-			graph.addEdge(graph.getVertex(edgeHolder.getLeft()), graph.getVertex(edgeHolder.getRight()), edgeHolder.getWeight());
-			logger.info("Edge: {}", graph.getEdges());
-		}
+		logger.debug("Edge: {}", graph.getEdges());
 		
 		return graph;
 	}

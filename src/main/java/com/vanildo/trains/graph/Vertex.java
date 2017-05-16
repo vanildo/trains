@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class Vertex {
 
 	private String name;

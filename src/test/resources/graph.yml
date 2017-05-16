@@ -1,13 +1,10 @@
-vertices:
-  - name: A
-  - name: B
-  - name: C
-  - name: D
-  - name: E
 edges:
-  - left: A
-    right: B
-    weight: 5
-  - left: B
-    right: C
-    weight: 4
+  - edge: AB5
+  - edge: BC4
+  - edge: CD8
+  - edge: DC8 
+  - edge: DE6
+  - edge: AD5
+  - edge: CE2
+  - edge: EB3
+  - edge: AE7

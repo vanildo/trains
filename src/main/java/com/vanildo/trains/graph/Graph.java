@@ -6,30 +6,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.vanildo.trains.util.EdgeHolder;
+
 public class Graph {
 
 	private Map<String, Vertex> vertices = new HashMap<String, Vertex>();
-	private Map<Integer, Edge> edges = new HashMap<Integer, Edge>();
+	private Map<String, Edge> edges;
+	static final Logger logger = LoggerFactory.getLogger(Graph.class);
 
-	public Graph() {
+	public Graph() { 
+		this.edges = new HashMap<String, Edge>();
 	}
 
+	
 	/**
-	 * This constructor accepts an ArrayList<Vertex> and populates
-	 * this.vertices. If multiple Vertex objects have the same Name(), then the
+	 * This constructor accepts an ArrayList<String> and populates
+	 * this.vertices and edges. If multiple Vertex objects have the same Name(), then the
 	 * last Vertex with the given Name() is used.
 	 * 
 	 * @param vertices
-	 *            The initial Vertices to populate this Graph
+	 *            The initial Vertices and Edges to populate this Graph
 	 */
-	public Graph(List<Vertex> vertices) {
-		this.vertices = new HashMap<String, Vertex>();
-		this.edges = new HashMap<Integer, Edge>();
+	public Graph(List<String> edgesAsString) {
+		this.edges = new HashMap<String, Edge>(edgesAsString.size());
+		populateGraph(edgesAsString);
 
-		for (Vertex v : vertices) {
-			this.vertices.put(v.getName(), v);
+	}
+
+
+	private void populateGraph(List<String> edgesAsString) {
+		for (String edge : edgesAsString) {
+			EdgeHolder edgeHolder = new EdgeHolder(edge);
+			logger.debug("EdgeHolder: {}", edgeHolder);
+			
+			addVertex(new Vertex(edgeHolder.getLeft()), true);
+			addVertex(new Vertex(edgeHolder.getRight()), true);
+			addEdge(getVertex(edgeHolder.getLeft()), getVertex(edgeHolder.getRight()), edgeHolder.getWeight());
 		}
-
 	}
 
 	/**
@@ -65,7 +81,7 @@ public class Graph {
 
 		// ensures the Edge is not in the Graph
 		Edge e = new Edge(one, two, weight);
-		if (edges.containsKey(e.hashCode())) {
+		if (edges.containsKey(e.getEdgeName())) {
 			return false;
 		}
 
@@ -74,7 +90,9 @@ public class Graph {
 			return false;
 		}
 
-		edges.put(e.hashCode(), e);
+		logger.debug("Edge key: {}", e.getEdgeName());
+		this.edges.put(e.getEdgeName(), e);
+		logger.debug("Edges: {}", this.edges);
 		one.addNeighbor(e);
 		two.addNeighbor(e);
 		return true;
@@ -91,7 +109,21 @@ public class Graph {
 			return false;
 		}
 
-		return this.edges.containsKey(e.hashCode());
+		return this.edges.containsKey(e.getEdgeName());
+	}
+	
+	/**
+	 * 
+	 * @param e
+	 *            The Edge to look up
+	 * @return Edge iff this Graph contains the Edge e
+	 */
+	public Edge getEdge(Edge e) {
+		if (e.getLeft() == null || e.getRight() == null) {
+			return null;
+		}
+
+		return this.edges.get(e.getEdgeName());
 	}
 
 	/**
@@ -105,7 +137,7 @@ public class Graph {
 	public Edge removeEdge(Edge e) {
 		e.getLeft().removeNeighbor(e);
 		e.getRight().removeNeighbor(e);
-		return this.edges.remove(e.hashCode());
+		return this.edges.remove(e.getEdgeName());
 	}
 
 	/**
