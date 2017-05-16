@@ -1,5 +1,10 @@
 package com.vanildo.trains.graph;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -12,35 +17,17 @@ public class GraphTest {
 	
 	@Before
 	public void moutGraph() {
-		this.graph = new Graph();
-		
-		Vertex a = new Vertex("a");
-		Vertex b = new Vertex("b");
-		Vertex c = new Vertex("c");
-		Vertex d = new Vertex("d");
-		Vertex e = new Vertex("e");
-		
-		graph.addVertex(a, true);
-		graph.addVertex(b, true);
-		graph.addVertex(c, true);
-		graph.addVertex(d, true);
-		graph.addVertex(e, true);
-		
-		graph.addEdge(a, b, 5);
-		graph.addEdge(b, c, 4);
-		graph.addEdge(c, d, 8);
-		graph.addEdge(d, c, 8);
-		graph.addEdge(d, e, 6);
-		graph.addEdge(a, d, 5);
-		graph.addEdge(c, e, 2);
-		graph.addEdge(e, b, 3);
-		graph.addEdge(a, e, 7);
+		this.graph = new Graph(Arrays.asList("AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"));
 	}
 	
 	@Test
-	public void assertPathLength() {
-		Edge edge = new Edge(new Vertex("a"), new Vertex("b"));
-		logger.info("Edge hashCode: {}", edge.hashCode());
-		logger.info("Conains edge? {}", graph.containsEdge(edge));
+	public void getAdjacentsTest() {
+		List<Vertex> adjacents = graph.getVertex("A").getAdjacentNodes();
+		logger.info("Adjacent Verticies: {}", adjacents);
+		
+		assertThat(adjacents).hasSize(3);
+		assertThat(adjacents).contains(graph.getVertex("B"));
+		assertThat(adjacents).contains(graph.getVertex("D"));
+		assertThat(adjacents).contains(graph.getVertex("E"));
 	}
 }

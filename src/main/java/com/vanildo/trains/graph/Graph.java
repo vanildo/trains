@@ -13,13 +13,11 @@ import com.vanildo.trains.util.EdgeHolder;
 
 public class Graph {
 
-	private Map<String, Vertex> vertices = new HashMap<String, Vertex>();
-	private Map<String, Edge> edges;
+	private final Map<String, Vertex> vertices = new HashMap<String, Vertex>();
+	private final Map<String, Edge> edges =  new HashMap<>();
 	static final Logger logger = LoggerFactory.getLogger(Graph.class);
 
-	public Graph() { 
-		this.edges = new HashMap<String, Edge>();
-	}
+	public Graph() { 	}
 
 	
 	/**
@@ -31,19 +29,18 @@ public class Graph {
 	 *            The initial Vertices and Edges to populate this Graph
 	 */
 	public Graph(List<String> edgesAsString) {
-		this.edges = new HashMap<String, Edge>(edgesAsString.size());
 		populateGraph(edgesAsString);
 
 	}
 
 
 	private void populateGraph(List<String> edgesAsString) {
-		for (String edge : edgesAsString) {
-			EdgeHolder edgeHolder = new EdgeHolder(edge);
+		for (String ed : edgesAsString) {
+			EdgeHolder edgeHolder = new EdgeHolder(ed);
 			logger.debug("EdgeHolder: {}", edgeHolder);
 			
-			addVertex(new Vertex(edgeHolder.getLeft()), true);
-			addVertex(new Vertex(edgeHolder.getRight()), true);
+			addVertex(new Vertex(edgeHolder.getLeft()), false);
+			addVertex(new Vertex(edgeHolder.getRight()), false);
 			addEdge(getVertex(edgeHolder.getLeft()), getVertex(edgeHolder.getRight()), edgeHolder.getWeight());
 		}
 	}

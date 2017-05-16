@@ -3,8 +3,6 @@ package com.vanildo.trains.graph;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * 
  * @author vanildo vanni
@@ -21,7 +19,18 @@ public class Vertex {
 		this.name = name;
 	}
 	
-	@JsonProperty
+	public List<Vertex> getAdjacentNodes() {
+		List<Vertex> adjacents = new ArrayList<>();
+		
+		for (Edge edge : neighbors) {
+			if(this.equals(edge.getLeft())) {
+				adjacents.add(edge.getRight());
+			}
+		}
+		
+		return adjacents;
+	}
+	
 	public String getName() {
 		return name;
 	}
