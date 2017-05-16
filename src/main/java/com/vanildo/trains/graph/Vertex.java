@@ -3,6 +3,8 @@ package com.vanildo.trains.graph;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Vertex {
 
 	private String name;
@@ -14,6 +16,7 @@ public class Vertex {
 		this.name = name;
 	}
 	
+	@JsonProperty
 	public String getName() {
 		return name;
 	}

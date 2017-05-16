@@ -1,0 +1,13 @@
+vertices:
+  - name: A
+  - name: B
+  - name: C
+  - name: D
+  - name: E
+edges:
+  - left: A
+    right: B
+    weight: 5
+  - left: B
+    right: C
+    weight: 4
