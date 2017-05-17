@@ -16,7 +16,6 @@ public class Route {
 
 	private List<Vertex> vertices = new ArrayList<>();
 	private final Graph graph;
-	private int hops;
 	
 	
 	public Route(Graph graph) {
@@ -35,8 +34,19 @@ public class Route {
 	}
 
 	public int getTotalDistance() throws RouteNotFoundException {
-		int i = 0;
 		int totalDistance = 0;
+		
+		for (Edge edge : getEdges()) {
+			totalDistance += edge.getWeight();
+		}
+		
+		return totalDistance;
+	}
+	
+	public List<Edge> getEdges() throws RouteNotFoundException {
+		List<Edge> edges = new ArrayList<>();
+		int i = 0;
+		
 		Vertex left = vertices.get(i);
 		Vertex right;
 		while (++i < vertices.size()) {
@@ -45,17 +55,54 @@ public class Route {
 			if (edge == null) {
 				throw new RouteNotFoundException();
 			}
-			totalDistance += edge.getWeight();
+			edges.add(edge);
 			left = right;
 			right = vertices.get(i);
 		}
-		return totalDistance;
+		
+		return edges;
 	}
 
 	public int getHops() {
-		return hops;
+		return this.vertices.size() - 1;
 	}
-	public void setHops(int hops) {
-		this.hops = hops;
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		for (Vertex v : getVertices()) {
+			sb.append(v.getName());
+		}
+		
+		return sb.toString();
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((vertices == null) ? 0 : vertices.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Route other = (Route) obj;
+		if (vertices == null) {
+			if (other.vertices != null)
+				return false;
+		} else if (!vertices.equals(other.vertices))
+			return false;
+		return true;
+	}
+	
 }

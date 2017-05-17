@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,18 +24,22 @@ public class GraphTest {
 	static final Logger logger = LoggerFactory.getLogger(GraphTest.class);
 	
 	@Before
-	public void moutGraph() {
+	public void setup() {
 		this.graph = new Graph(Arrays.asList("AB5", "BC4", "CD8", "DC8", "DE6", "AD5", "CE2", "EB3", "AE7"));
 	}
 	
 	@Test
-	public void depthFirstTest() {
+	public void routesWithMaximumHopsTest() {
 		IRouteCalculator routeCalculator = new RouteCalculator(graph);
-		List<Route> routes = new ArrayList<>();
-		LinkedList<Vertex> visited = new LinkedList<>();
-		visited.add(graph.getVertex("A"));
 
-		routeCalculator.depthFirst(visited, graph.getVertex("C"), 10, routes);
+		Set<Route> routes = routeCalculator.routesWithMaximumHops(graph.getVertex("C"), graph.getVertex("C"), 3);
+	}
+	
+	@Test
+	public void getPossibleRoutesTest() {
+		IRouteCalculator routeCalculator = new RouteCalculator(graph);
+
+		Set<Route> routes = routeCalculator.getPossibleRoutes(graph.getVertex("A"), graph.getVertex("C"));
 		logger.debug("Rotas: {}", routes.size());
 	}
 	

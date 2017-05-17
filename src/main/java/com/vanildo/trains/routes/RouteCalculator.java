@@ -2,8 +2,11 @@ package com.vanildo.trains.routes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,9 +62,12 @@ public class RouteCalculator implements IRouteCalculator {
 	}
 
 	@Override
-	public List<Route> routesWithMaximumHops(Vertex start, Vertex end, int maxHops) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Route> routesWithMaximumHops(Vertex start, Vertex end, int maxHops) {
+		Set<Route> routes =  getPossibleRoutes(start, end);
+		
+		return routes.stream()
+					 .filter(route -> route.getHops() <= 3)
+					 .collect(Collectors.toSet());
 	}
 
 	@Override
@@ -76,8 +82,8 @@ public class RouteCalculator implements IRouteCalculator {
 		return null;
 	}
 
-	private List<Route> getPossibleRoutes(Vertex start, Vertex end) {
-		List<Route> routes = new ArrayList<>();
+	public Set<Route> getPossibleRoutes(Vertex start, Vertex end) {
+		Set<Route> routes = new HashSet<>();
 		LinkedList<Vertex> visited = new LinkedList<>();
 		visited.add(start);
 
@@ -86,7 +92,7 @@ public class RouteCalculator implements IRouteCalculator {
 		return routes;
 	}
 
-	public void depthFirst(LinkedList<Vertex> visited, Vertex end, int depth, List<Route> routes) {
+	private void depthFirst(LinkedList<Vertex> visited, Vertex end, int depth, Set<Route> routes) {
 		Vertex start = visited.getLast();
 		
 		while (depth > 0) {
@@ -102,28 +108,17 @@ public class RouteCalculator implements IRouteCalculator {
                 }
             }
 			for (Vertex v : start.getAdjacentNodes()) {
-                visited.addLast(v);
-                depthFirst(visited, end, depth, routes);
-                visited.removeLast();
-                depth -= 1;
+				if (!visited.contains(v)) {
+					visited.addLast(v);
+	                depthFirst(visited, end, depth, routes);
+	                visited.removeLast();
+	                depth -= 1;
+				}
             }
             
             depth -= 1;
         }
 		
-//		for (Vertex v : start.getAdjacentNodes()) {
-//			//TODO criar a rota para o nó, caso ache
-//			if (!visited.contains(v)) {
-//				visited.add(v);
-//				rotaAtual.add(v);
-//				depthFirst(visited, end, 0, routes);
-//				if(v.equals(end)) {
-//					Route route = new Route(graph);
-//					route.getVertices().addAll(rotaAtual);
-//					routes.add(route);
-//				}
-//			}
-//		}
 	}
 
 }
