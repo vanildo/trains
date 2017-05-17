@@ -18,6 +18,6 @@ public interface IRouteCalculator {
 	
 	List<Route> routesWithExactHops(Vertex start, Vertex end, int hops);
 	
-	public void depthFirst(LinkedList<Vertex> visited, Vertex end, List<Route> routes);
+	public void depthFirst(LinkedList<Vertex> visited, Vertex end, int depth, List<Route> routes);
 
 }

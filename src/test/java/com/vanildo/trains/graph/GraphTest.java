@@ -28,6 +28,17 @@ public class GraphTest {
 	}
 	
 	@Test
+	public void depthFirstTest() {
+		IRouteCalculator routeCalculator = new RouteCalculator(graph);
+		List<Route> routes = new ArrayList<>();
+		LinkedList<Vertex> visited = new LinkedList<>();
+		visited.add(graph.getVertex("A"));
+
+		routeCalculator.depthFirst(visited, graph.getVertex("C"), 10, routes);
+		logger.debug("Rotas: {}", routes.size());
+	}
+	
+	@Test
 	public void totalDistanceTest() throws RouteNotFoundException {
 		IRouteCalculator routeCalculator = new RouteCalculator(graph);
 		int totalDistance = routeCalculator.getDistance(graph.getVertex("A"), graph.getVertex("B"), graph.getVertex("C"));
@@ -35,16 +46,6 @@ public class GraphTest {
 		assertThat(totalDistance).isEqualTo(9);
 	}
 	
-//	@Test
-//	public void depthFirstTest() {
-//		IRouteCalculator routeCalculator = new RouteCalculator(graph);
-//		List<Route> routes = new ArrayList<>();
-//		LinkedList<Vertex> visited = new LinkedList<>();
-//		visited.add(graph.getVertex("A"));
-//
-//		routeCalculator.depthFirst(visited, graph.getVertex("C"), routes);
-//	}
-//	
 	@Test
 	public void getAdjacentsTest() {
 		List<Vertex> adjacents = graph.getVertex("A").getAdjacentNodes();
