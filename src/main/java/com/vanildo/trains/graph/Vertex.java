@@ -12,6 +12,7 @@ public class Vertex {
 
 	private String name;
 	private List<Edge> neighbors = new ArrayList<Edge>();
+	private boolean visited;
 	
 	public Vertex() { }
 	
@@ -63,6 +64,14 @@ public class Vertex {
 	
 	public Edge getNeighbor(int index) {
 		return this.neighbors.get(index);
+	}
+	
+	public boolean isVisited() {
+		return visited;
+	}
+
+	public void setVisited(boolean visited) {
+		this.visited = visited;
 	}
 	
 	@Override

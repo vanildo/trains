@@ -102,10 +102,38 @@ public class RouteCalculator implements IRouteCalculator {
 		visited.add(start);
 
 		depthFirst(visited, end, MAX_DEPTH, routes);
-
+		
 		return routes;
 	}
-
+	
+//	private void depthFirst(LinkedList<Vertex> visited, Vertex end, int depth, Set<Route> routes) {
+//		Vertex start = visited.getLast();
+//		
+//		for (Vertex v : start.getAdjacentNodes()) {
+//			if (visited.contains(v)) {
+//				continue;
+//			}
+//            if (v.equals(end)) {
+//                visited.add(v);
+//                Route route = new Route(graph);
+//				route.getVertices().addAll(visited);
+//				routes.add(route);
+//                visited.removeLast();
+//                break;
+//            }
+//        }
+//		
+//		for (Vertex v : start.getAdjacentNodes()) {
+//			if (visited.contains(v) || v.equals(end)) {
+//				continue;
+//			}
+//            visited.addLast(v);
+//            depthFirst(visited, end, depth, routes);
+//            visited.removeLast();
+//        }
+//		
+//	}
+	
 	private void depthFirst(LinkedList<Vertex> visited, Vertex end, int depth, Set<Route> routes) {
 		Vertex start = visited.getLast();
 		

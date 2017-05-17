@@ -47,10 +47,19 @@ public class TrainsRoute {
 		logger.info("Output #{}: {}", i++, routeCalculator.routesWithMaximumHops(graph.getVertex("C"), graph.getVertex("C"), 3).size());
 		logger.info("Output #{}: {}", i++, routeCalculator.routesWithExactHops(graph.getVertex("A"), graph.getVertex("C"), 4).size());
 		
-		logger.info("Output #{}: {}", i++, routeCalculator.shortestPath(graph.getVertex("A"), graph.getVertex("C")));
-//		logger.info("Output #{}: {}", i++, routeCalculator.shortestPath(graph.getVertex("B"), graph.getVertex("B")));
+		showShortestPath(i++, graph.getVertex("A"), graph.getVertex("C"));
+		showShortestPath(i++, graph.getVertex("B"), graph.getVertex("B"));
+		
 		logger.info("Output #{}: {}", i++, routeCalculator.routesWithMaximumDistance(graph.getVertex("C"), graph.getVertex("C"), 30).size());
 		
+	}
+
+	private void showShortestPath(int i, Vertex start, Vertex end)  {
+		try {
+			logger.info("Output #{}: {}", i, routeCalculator.shortestPath(start, end).getTotalDistance());
+		} catch (RouteNotFoundException e) {
+			logger.info("Output #{}: NO SUCH ROUTE", i);
+		}
 	}
 
 	private void showDistance(int i, Vertex ...vertices) {
