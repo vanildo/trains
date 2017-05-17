@@ -47,6 +47,9 @@ public class GraphTest {
 		Route route = routeCalculator.shortestPath(graph.getVertex("A"), graph.getVertex("C"));
 		
 		assertThat(route.getTotalDistance()).isEqualTo(9);
+		
+		route = routeCalculator.shortestPath(graph.getVertex("B"), graph.getVertex("B"));
+		assertThat(route.getTotalDistance()).isEqualTo(9);
 	}
 	
 	@Test
@@ -82,6 +85,21 @@ public class GraphTest {
 		int totalDistance = routeCalculator.getDistance(graph.getVertex("A"), graph.getVertex("B"), graph.getVertex("C"));
 		
 		assertThat(totalDistance).isEqualTo(9);
+		
+		totalDistance = routeCalculator.getDistance(graph.getVertex("A"), graph.getVertex("D"));
+		assertThat(totalDistance).isEqualTo(5);
+		
+		totalDistance = routeCalculator.getDistance(graph.getVertex("A"), graph.getVertex("D"), graph.getVertex("C"));
+		assertThat(totalDistance).isEqualTo(13);
+		
+		totalDistance = routeCalculator.getDistance(graph.getVertex("A"), graph.getVertex("E"), graph.getVertex("B"), graph.getVertex("C"), graph.getVertex("D"));
+		assertThat(totalDistance).isEqualTo(22);
+		
+		try {
+			totalDistance = routeCalculator.getDistance(graph.getVertex("A"), graph.getVertex("E"), graph.getVertex("D"));
+		} catch (Exception e) {
+			assertThat(e).isInstanceOf(RouteNotFoundException.class);
+		}
 	}
 	
 	@Test
