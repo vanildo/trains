@@ -2,9 +2,7 @@ package com.vanildo.trains.graph;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -33,6 +31,35 @@ public class GraphTest {
 		IRouteCalculator routeCalculator = new RouteCalculator(graph);
 
 		Set<Route> routes = routeCalculator.routesWithMaximumHops(graph.getVertex("C"), graph.getVertex("C"), 3);
+		
+		assertThat(routes).hasSize(2);
+	}
+	
+	@Test
+	public void shortestPathTest() throws RouteNotFoundException {
+		IRouteCalculator routeCalculator = new RouteCalculator(graph);
+		Route route = routeCalculator.shortestPath(graph.getVertex("A"), graph.getVertex("C"));
+		
+		assertThat(route.getTotalDistance()).isEqualTo(9);
+	}
+	
+	@Test
+	public void routesWithMaximumDistanceTest() {
+		IRouteCalculator routeCalculator = new RouteCalculator(graph);
+		Set<Route> routes = routeCalculator.routesWithMaximumDistance(graph.getVertex("C"), graph.getVertex("C"), 30);
+		
+		assertThat(routes).hasSize(7);
+	}
+	
+	@Test
+	public void routesWithExactHopsTest() {
+		IRouteCalculator routeCalculator = new RouteCalculator(graph);
+
+		Set<Route> routes = routeCalculator.routesWithExactHops(graph.getVertex("A"), graph.getVertex("C"), 4);
+		Route r = routes.iterator().next();
+		logger.info(r.getVertices().toString());
+		
+		assertThat(routes).hasSize(3);
 	}
 	
 	@Test

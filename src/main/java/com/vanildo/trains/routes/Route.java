@@ -3,6 +3,9 @@ package com.vanildo.trains.routes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vanildo.trains.exceptions.RouteNotFoundException;
 import com.vanildo.trains.graph.Edge;
 import com.vanildo.trains.graph.Graph;
@@ -12,10 +15,11 @@ import com.vanildo.trains.graph.Vertex;
  * @author vanildo vanni
  *
  */
-public class Route {
+public class Route implements Comparable<Route>{
 
 	private List<Vertex> vertices = new ArrayList<>();
 	private final Graph graph;
+	static final Logger logger = LoggerFactory.getLogger(Route.class);
 	
 	
 	public Route(Graph graph) {
@@ -81,10 +85,10 @@ public class Route {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((vertices == null) ? 0 : vertices.hashCode());
-		return result;
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((vertices == null) ? 0 : vertices.hashCode());
+		return vertices.toString().hashCode();
 	}
 
 
@@ -103,6 +107,17 @@ public class Route {
 		} else if (!vertices.equals(other.vertices))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public int compareTo(Route o) {
+		try {
+			return this.getTotalDistance() - o.getTotalDistance();
+		} catch (RouteNotFoundException e) {
+			logger.error("No such route: {}", e.getMessage());
+		}
+		return 0;
 	}
 	
 }

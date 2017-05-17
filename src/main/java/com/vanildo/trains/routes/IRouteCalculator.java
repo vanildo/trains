@@ -1,6 +1,5 @@
 package com.vanildo.trains.routes;
 
-import java.util.List;
 import java.util.Set;
 
 import com.vanildo.trains.exceptions.RouteNotFoundException;
@@ -14,9 +13,9 @@ public interface IRouteCalculator {
 	
 	Set<Route> routesWithMaximumHops(Vertex start, Vertex end, int maxHops);
 	
-	List<Route> routesWithMaximumDistance(Vertex start, Vertex end, int maxDistance);
+	Set<Route> routesWithMaximumDistance(Vertex start, Vertex end, int maxDistance);
 	
-	List<Route> routesWithExactHops(Vertex start, Vertex end, int hops);
+	Set<Route> routesWithExactHops(Vertex start, Vertex end, int hops);
 	
 	public Set<Route> getPossibleRoutes(Vertex start, Vertex end);
 

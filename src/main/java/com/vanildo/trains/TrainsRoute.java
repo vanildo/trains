@@ -44,7 +44,12 @@ public class TrainsRoute {
 		showDistance(i++, graph.getVertex("A"), graph.getVertex("E"), graph.getVertex("B"), graph.getVertex("C"), graph.getVertex("D"));
 		showDistance(i++, graph.getVertex("A"), graph.getVertex("E"), graph.getVertex("D"));
 		
+		logger.info("Output #{}: {}", i++, routeCalculator.routesWithMaximumHops(graph.getVertex("C"), graph.getVertex("C"), 3).size());
+		logger.info("Output #{}: {}", i++, routeCalculator.routesWithExactHops(graph.getVertex("A"), graph.getVertex("C"), 4).size());
 		
+		logger.info("Output #{}: {}", i++, routeCalculator.shortestPath(graph.getVertex("A"), graph.getVertex("C")));
+//		logger.info("Output #{}: {}", i++, routeCalculator.shortestPath(graph.getVertex("B"), graph.getVertex("B")));
+		logger.info("Output #{}: {}", i++, routeCalculator.routesWithMaximumDistance(graph.getVertex("C"), graph.getVertex("C"), 30).size());
 		
 	}
 
