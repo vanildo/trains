@@ -11,6 +11,12 @@ import com.vanildo.trains.graph.Graph;
 import com.vanildo.trains.graph.Vertex;
 import com.vanildo.trains.routes.RouteCalculator;
 
+
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class TrainsRoute {
 	
 	static final Logger logger = LoggerFactory.getLogger(TrainsRoute.class);

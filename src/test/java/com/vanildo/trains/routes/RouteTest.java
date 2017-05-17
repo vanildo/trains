@@ -13,6 +13,12 @@ import com.vanildo.trains.exceptions.RouteNotFoundException;
 import com.vanildo.trains.graph.Graph;
 import com.vanildo.trains.graph.GraphTest;
 
+
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class RouteTest {
 	
 	private Graph graph;

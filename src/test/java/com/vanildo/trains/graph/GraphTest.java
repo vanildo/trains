@@ -16,6 +16,12 @@ import com.vanildo.trains.routes.IRouteCalculator;
 import com.vanildo.trains.routes.Route;
 import com.vanildo.trains.routes.RouteCalculator;
 
+
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class GraphTest {
 
 	private Graph graph;

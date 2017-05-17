@@ -60,7 +60,6 @@ public class Edge implements Comparable<Edge> {
 		}
 		Edge e = (Edge) other;
 
-//		return e.left.equals(this.left) && e.right.equals(this.right);
 		if (this.getEdgeName() == null && e.getEdgeName() != null) {
 			return false;
 		}

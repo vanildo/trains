@@ -106,40 +106,15 @@ public class RouteCalculator implements IRouteCalculator {
 		return routes;
 	}
 	
-//	private void depthFirst(LinkedList<Vertex> visited, Vertex end, int depth, Set<Route> routes) {
-//		Vertex start = visited.getLast();
-//		
-//		for (Vertex v : start.getAdjacentNodes()) {
-//			if (visited.contains(v)) {
-//				continue;
-//			}
-//            if (v.equals(end)) {
-//                visited.add(v);
-//                Route route = new Route(graph);
-//				route.getVertices().addAll(visited);
-//				routes.add(route);
-//                visited.removeLast();
-//                break;
-//            }
-//        }
-//		
-//		for (Vertex v : start.getAdjacentNodes()) {
-//			if (visited.contains(v) || v.equals(end)) {
-//				continue;
-//			}
-//            visited.addLast(v);
-//            depthFirst(visited, end, depth, routes);
-//            visited.removeLast();
-//        }
-//		
-//	}
-	
 	private void depthFirst(LinkedList<Vertex> visited, Vertex end, int depth, Set<Route> routes) {
 		Vertex start = visited.getLast();
 		
 		while (depth > 0) {
         	// examine adjacent nodes
 			for (Vertex v : start.getAdjacentNodes()) {
+				if (checkCycle(visited)) {
+					continue;
+				}
                 if (v.equals(end)) {
                     visited.add(v);
                     Route route = new Route(graph);
@@ -153,10 +128,21 @@ public class RouteCalculator implements IRouteCalculator {
                 visited.removeLast();
                 depth -= 1;
             }
-            
             depth -= 1;
         }
 		
+	}
+
+	private boolean checkCycle(LinkedList<Vertex> visited) {
+		if (visited.size() > 4) {
+			Vertex last = visited.getLast();
+			Vertex oneBeforeLast = visited.get(visited.size() - 2);
+			Vertex twoBeforeLast = visited.get(visited.size() - 3);
+			Vertex threeBeforeLast = visited.get(visited.size() - 4);
+			
+			return (last.equals(twoBeforeLast)) && (oneBeforeLast.equals(threeBeforeLast));
+		}
+		return false;
 	}
 
 }

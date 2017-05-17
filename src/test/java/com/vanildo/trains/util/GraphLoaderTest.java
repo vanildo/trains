@@ -13,6 +13,11 @@ import com.vanildo.trains.graph.Graph;
 import com.vanildo.trains.graph.Vertex;
 
 
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class GraphLoaderTest {
 	
 	static final Logger logger = LoggerFactory.getLogger(GraphLoaderTest.class);

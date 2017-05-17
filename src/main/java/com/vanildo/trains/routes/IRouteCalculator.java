@@ -5,6 +5,12 @@ import java.util.Set;
 import com.vanildo.trains.exceptions.RouteNotFoundException;
 import com.vanildo.trains.graph.Vertex;
 
+
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public interface IRouteCalculator {
 
 	int getDistance(Vertex... vertices) throws RouteNotFoundException;

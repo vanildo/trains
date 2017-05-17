@@ -3,6 +3,11 @@ package com.vanildo.trains.util;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class EdgeHolder {
 
 	@JsonProperty

@@ -15,6 +15,12 @@ import com.vanildo.trains.graph.Graph;
 import com.vanildo.trains.graph.Vertex;
 import com.vanildo.trains.util.EdgeHolder;
 
+
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class YamlGraphLoader implements ILoader<Graph>{
 	
 	private final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());

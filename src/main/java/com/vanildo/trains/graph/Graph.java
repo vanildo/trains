@@ -11,6 +11,12 @@ import org.slf4j.LoggerFactory;
 
 import com.vanildo.trains.util.EdgeHolder;
 
+
+/**
+ * 
+ * @author vanildo vanni
+ *
+ */
 public class Graph {
 
 	private final Map<String, Vertex> vertices = new HashMap<String, Vertex>();
