@@ -16,16 +16,16 @@ A directed graph where a node represents a town and an edge represents a route b
 
 For test input 1 through 5, if no such route exists, output 'NO SUCH ROUTE'.  Otherwise, follow the route as given; do not make any extra stops!  For example, the first problem means to start at city A, then travel directly to city B (a distance of 5), then directly to city C (a distance of 4).
 
-- The distance of the route A-B-C.
-- The distance of the route A-D.
-- The distance of the route A-D-C.
-- The distance of the route A-E-B-C-D.
-- The distance of the route A-E-D.
-- The number of trips starting at C and ending at C with a maximum of 3 stops.  In the sample data below, there are two such trips: C-D-C (2 stops). and C-E-B-C (3 stops).
-- The number of trips starting at A and ending at C with exactly 4 stops.  In the sample data below, there are three such trips: A to C (via B,C,D); A to C (via D,C,D); and A to C (via D,E,B).
-- The length of the shortest route (in terms of distance to travel) from A to C.
-- The length of the shortest route (in terms of distance to travel) from B to B.
-- The number of different routes from C to C with a distance of less than 30.  In the sample data, the trips are: CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC.
+1. The distance of the route A-B-C.
+1. The distance of the route A-D.
+1. The distance of the route A-D-C.
+1. The distance of the route A-E-B-C-D.
+1. The distance of the route A-E-D.
+1. The number of trips starting at C and ending at C with a maximum of 3 stops.  In the sample data below, there are two such trips: C-D-C (2 stops). and C-E-B-C (3 stops).
+1. The number of trips starting at A and ending at C with exactly 4 stops.  In the sample data below, there are three such trips: A to C (via B,C,D); A to C (via D,C,D); and A to C (via D,E,B).
+1. The length of the shortest route (in terms of distance to travel) from A to C.
+1. The length of the shortest route (in terms of distance to travel) from B to B.
+1. The number of different routes from C to C with a distance of less than 30.  In the sample data, the trips are: CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC.
 
 ## Test Input:
 
@@ -35,13 +35,13 @@ AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7
 
 ## Test Output:
 
-- Output #1: 9
-- Output #2: 5
-- Output #3: 13
-- Output #4: 22
-- Output #5: NO SUCH ROUTE
-- Output #6: 2
-- Output #7: 3
-- Output #8: 9
-- Output #9: 9
-- Output #10: 7
+1. Output #1: 9
+1. Output #2: 5
+1. Output #3: 13
+1. Output #4: 22
+1. Output #5: NO SUCH ROUTE
+1. Output #6: 2
+1. Output #7: 3
+1. Output #8: 9
+1. Output #9: 9
+1. Output #10: 7
