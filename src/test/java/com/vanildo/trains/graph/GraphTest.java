@@ -33,6 +33,17 @@ public class GraphTest {
 	}
 	
 	@Test
+	public void fastestRouteTest() {
+		IRouteCalculator routeCalculator = new RouteCalculator(graph);
+		Route route = routeCalculator.fastestPath(graph.getVertex("B"), graph.getVertex("B"));
+		try {
+			assertThat(route.getTripDuration()).isEqualTo(13);
+		} catch (RouteNotFoundException e) {
+			logger.error("Rota não encontrada: {}", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void routesWithMaximumHopsTest() {
 		IRouteCalculator routeCalculator = new RouteCalculator(graph);
 

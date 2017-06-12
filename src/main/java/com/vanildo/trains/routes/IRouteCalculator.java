@@ -25,4 +25,6 @@ public interface IRouteCalculator {
 	
 	public Set<Route> getPossibleRoutes(Vertex start, Vertex end);
 
+	Route fastestPath(Vertex start, Vertex end);
+
 }

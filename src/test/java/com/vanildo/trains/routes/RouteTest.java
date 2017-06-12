@@ -33,6 +33,15 @@ public class RouteTest {
 	}
 	
 	@Test
+	public void getTripDurtationTest() {
+		try {
+			assertThat(route.getTripDuration()).isEqualTo(11);
+		} catch (RouteNotFoundException e) {
+			logger.error("Rota não encontrada: {}", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void getDistanceTest() throws RouteNotFoundException {
 		int totalDistance = route.getTotalDistance();
 		

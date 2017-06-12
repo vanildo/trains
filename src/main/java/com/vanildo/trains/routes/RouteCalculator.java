@@ -30,6 +30,25 @@ public class RouteCalculator implements IRouteCalculator {
 		this.MAX_DEPTH = this.graph.getEdges().size() + 1;
 	}
 
+	@Override
+	public Route fastestPath(Vertex start, Vertex end) {
+		Set<Route> routes =  getPossibleRoutes(start, end);
+		
+		Route route = routes.stream()
+							.sorted((o1, o2) -> {
+								int duration = Integer.MAX_VALUE;
+								try {
+									duration = o1.getTripDuration() - o2.getTripDuration();
+								} catch (RouteNotFoundException e) {
+									e.printStackTrace();
+								}
+								return duration;
+							})
+							.collect(Collectors.toList())
+							.get(0);
+		return route;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

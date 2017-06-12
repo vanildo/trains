@@ -21,6 +21,9 @@ public class Route implements Comparable<Route>{
 	private final Graph graph;
 	static final Logger logger = LoggerFactory.getLogger(Route.class);
 	
+	private final int STOP_DURATION = 2;
+	private final int TRIP_TIME = 1;
+	
 	
 	public Route(Graph graph) {
 		this.graph = graph;
@@ -118,6 +121,19 @@ public class Route implements Comparable<Route>{
 			logger.error("No such route: {}", e.getMessage());
 		}
 		return 0;
+	}
+
+
+	public int getTripDuration() throws RouteNotFoundException {
+		int travelTime = getTotalDistance() * TRIP_TIME;
+		int stopsTime = getTotalStops() * STOP_DURATION;
+		
+		return travelTime + stopsTime;
+	}
+
+
+	private int getTotalStops() {
+		return vertices.size() - 2;
 	}
 	
 }
